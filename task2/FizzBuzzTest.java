@@ -11,7 +11,7 @@ public class FizzBuzzTest {
 
         BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
-        ExecutorService executor = Executors.newFixedThreadPool(5);
+        ExecutorService executor = Executors.newFixedThreadPool(4);
 
         NumberProducer numberProducer = new NumberProducer(queue);
         FizzProducer fizzProducer = new FizzProducer(queue);
@@ -23,9 +23,8 @@ public class FizzBuzzTest {
         executor.execute(fizzProducer);
         executor.execute(buzzProducer);
         executor.execute(fizzBuzzProducer);
-        executor.execute(consumerFB);
 
-        for (int i = 1; i < 30; i++) {
+        for (int i = 1; i <= 60; i++) {
             numberProducer.setN(i);
             fizzProducer.setN(i);
             buzzProducer.setN(i);
@@ -35,8 +34,16 @@ public class FizzBuzzTest {
                     (fizzProducer.isUpdated()) ||
                     (buzzProducer.isUpdated()) ||
                     (fizzBuzzProducer.isUpdated())) {
-                Thread.sleep(10);
+                Thread.sleep(50);
             }
+
+            consumerFB.consumer();
         }
+
+        numberProducer.setInterrupted(true);
+        fizzProducer.setInterrupted(true);
+        buzzProducer.setInterrupted(true);
+        fizzBuzzProducer.setInterrupted(true);
+        executor.shutdown();
     }
 }

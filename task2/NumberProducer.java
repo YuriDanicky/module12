@@ -7,6 +7,7 @@ public class NumberProducer implements Runnable {
     BlockingQueue<String> queue;
     private int n;
     private boolean updated = false;
+    private boolean interrupted = false;
 
     public NumberProducer(BlockingQueue<String> queue) {
         this.queue = queue;
@@ -17,13 +18,17 @@ public class NumberProducer implements Runnable {
         updated = true;
     }
 
+    public void setInterrupted(boolean interrupted) {
+        this.interrupted = interrupted;
+    }
+
     public boolean isUpdated() {
         return updated;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (!interrupted) {
             try {
                 if (updated) {
                     updated = false;

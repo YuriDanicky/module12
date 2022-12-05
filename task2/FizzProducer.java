@@ -6,6 +6,8 @@ public class FizzProducer implements Runnable {
     BlockingQueue<String> queue;
     private int n;
     private boolean updated = false;
+    private boolean interrupted = false;
+
 
     public FizzProducer(BlockingQueue<String> queue) {
         this.queue = queue;
@@ -16,6 +18,10 @@ public class FizzProducer implements Runnable {
         updated = true;
     }
 
+    public void setInterrupted(boolean interrupted) {
+        this.interrupted = interrupted;
+    }
+
     public boolean isUpdated() {
         return updated;
     }
@@ -23,7 +29,7 @@ public class FizzProducer implements Runnable {
     @Override
     public void run() {
         try {
-            while (true) {
+            while (!interrupted) {
                 if (updated) {
                     updated = false;
                     if ((n % 3 == 0) && !(n % 5 == 0)) {
