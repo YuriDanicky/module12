@@ -25,13 +25,13 @@ public class NumberProducer implements Runnable {
     public void run() {
         while (true) {
             try {
-                while (updated) {
+                if (updated) {
                     updated = false;
                     if ((n % 3 != 0) && (n % 5 != 0)) {
                         queue.put(String.valueOf(n));
                     }
-                    Thread.sleep(100);
                 }
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,7 +1,5 @@
 package module12.task2;
 
-import module12.task1.Consumer;
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,7 +35,7 @@ public class FizzBuzzTest {
                     (fizzProducer.isUpdated()) ||
                     (buzzProducer.isUpdated()) ||
                     (fizzBuzzProducer.isUpdated())) {
-                Thread.sleep(100);
+                Thread.sleep(10);
             }
         }
     }

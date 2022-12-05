@@ -15,12 +15,13 @@ public class ConsumerFB implements Runnable {
         while (true) {
             while (!queue.isEmpty()) {
                 System.out.println(queue.poll());
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
 }
+

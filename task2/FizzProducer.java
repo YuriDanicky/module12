@@ -24,14 +24,13 @@ public class FizzProducer implements Runnable {
     public void run() {
         try {
             while (true) {
-                while (updated) {
+                if (updated) {
                     updated = false;
                     if ((n % 3 == 0) && !(n % 5 == 0)) {
                         queue.put("fizz");
-                        System.out.println("put fizz");
                     }
-                    Thread.sleep(100);
                 }
+                Thread.sleep(100);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

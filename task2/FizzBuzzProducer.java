@@ -23,17 +23,18 @@ public class FizzBuzzProducer implements Runnable {
     @Override
     public void run() {
         while (true) {
-            while (updated) {
-                updated = false;
-                if ((n % 3 == 0) && (n % 5 == 0)) {
-                    try {
+            try {
+                if (updated) {
+                    updated = false;
+                    if ((n % 3 == 0) && (n % 5 == 0)) {
                         queue.put("fizzbuzz");
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
                 }
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
 }
+
